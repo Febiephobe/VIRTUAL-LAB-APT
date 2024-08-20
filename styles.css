@@ -1,0 +1,278 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;  /* Main background color */
+    color: black;  /* Main text color */
+}
+
+h1 {
+    color: blue;  /* Header in blue */
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f0f0f0;  /* Light grey background */
+    border: 2px solid black;  /* Black outline */
+    border-radius: 10px;
+}
+
+.teacher-area {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.teacher-img {
+    width: 100px;
+    margin-right: 20px;
+}
+
+.sample-selection {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: blue;
+    color: white;
+    border: 2px solid black;  /* Black outline */
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+}
+
+/* Centered layout for specimen and reagent */
+.centered-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px; /* Space between specimen and reagent */
+    margin-top: 20px;
+}
+
+.sample-area, .equipment-area {
+    position: relative;
+}
+
+/* Reagent Drop Animation */
+@keyframes pourReagent {
+    0% { top: 0; left: 100%; transform: translate(-50%, -50%) scale(0); opacity: 0; }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+    100% { top: 50%; left: 0%; transform: translate(0%, -50%) scale(1); opacity: 0; }
+}
+
+.reagent-drop {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: blue;
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    top: 50%;
+    left: 100%;
+    transform: translate(-50%, -50%);
+}
+
+/* Result Area Styles */
+.result-area {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.color-box {
+    width: 120px;
+    height: 120px;
+    background-color: #ccc;  /* Default color */
+    border-radius: 50%;  /* Circle shape */
+    transition: background-color 3s ease-in-out; /* Smooth transition for color change */
+    border: 2px solid black;  /* Black outline */
+    margin: 0 auto;  /* Centered */
+}
+
+/* Modal (Microscope View) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;  /* Main background color */
+    color: black;  /* Main text color */
+}
+
+h1 {
+    color: blue;  /* Header in blue */
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f0f0f0;  /* Light grey background */
+    border: 2px solid black;  /* Black outline */
+    border-radius: 10px;
+}
+
+.teacher-area {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.teacher-img {
+    width: 100px;
+    margin-right: 20px;
+}
+
+.sample-selection {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: blue;
+    color: white;
+    border: 2px solid black;  /* Black outline */
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+}
+
+/* Centered layout for specimen and reagent */
+.centered-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px; /* Space between specimen and reagent */
+    margin-top: 20px;
+}
+
+.sample-area, .equipment-area {
+    position: relative;
+}
+
+/* Reagent Drop Animation */
+@keyframes pourReagent {
+    0% { top: 0; left: 100%; transform: translate(-50%, -50%) scale(0); opacity: 0; }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+    100% { top: 50%; left: 0%; transform: translate(0%, -50%) scale(1); opacity: 0; }
+}
+
+.reagent-drop {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: blue;
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    top: 50%;
+    left: 100%;
+    transform: translate(-50%, -50%);
+}
+
+/* Result Area Styles */
+.result-area {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.color-box {
+    width: 120px;
+    height: 120px;
+    background-color: #ccc;  /* Default color */
+    border-radius: 50%;  /* Circle shape */
+    transition: background-color 3s ease-in-out; /* Smooth transition for color change */
+    border: 2px solid black;  /* Black outline */
+    margin: 0 auto;  /* Centered */
+}
+
+/* Modal (Discussion View) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+    color: white;
+}
+
+.modal-content {
+    background-color: #333;
+    margin: auto;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 800px;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}

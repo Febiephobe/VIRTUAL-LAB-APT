@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Lab - Acid Phosphatase Test</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Acid Phosphatase Test - Virtual Lab</h1>
+
+        <!-- Teacher's Instruction -->
+        <div class="teacher-area">
+            <img src="teacher.png" alt="Teacher" id="teacherImg" class="teacher-img">
+            <p id="teacherInstruction">Follow the steps to perform the Acid Phosphatase test and determine the presence of semen.</p>
+        </div>
+
+        <!-- Sample Selection -->
+        <div class="sample-selection" id="sampleSelection">
+            <h2>Select a Specimen</h2>
+            <button id="specimen1">Specimen 1</button>
+            <button id="specimen2">Specimen 2</button>
+        </div>
+
+        <!-- Lab Area -->
+        <div class="lab-content" id="labContent" style="display: none;">
+            <p id="instructionText">Click on the specimen to apply the reagent.</p>
+            <div class="centered-area">
+                <div class="sample-area">
+                    <img src="sample.png" alt="Sample" id="sampleImg" class="clickable">
+                </div>
+                <div class="equipment-area">
+                    <img src="reagent.png" alt="Reagent Bottle" id="reagentImg" class="clickable">
+                    <div id="reagentDrop" class="reagent-drop"></div>
+                </div>
+            </div>
+            <div class="result-area">
+                <p>Result</p>
+                <div id="resultColor" class="color-box"></div>
+                <p id="clickInstruction" style="display: none;">Click the result to see the discussion.</p>
+            </div>
+            <button id="applyReagentBtn" disabled>Apply Reagent</button>
+            <button id="returnBtn" style="display: none;">Return to Selection</button>
+        </div>
+
+        <!-- Discussion Modal -->
+        <div id="discussionModal" class="modal">
+            <span class="close">&times;</span>
+            <div class="modal-content">
+                <div class="teacher-area">
+                    <img src="teacher.png" alt="Teacher" id="teacherImg" class="teacher-img">
+                </div>
+                <h2>Discussion on the Acid Phosphatase Test</h2>
+                <p><strong>Origin:</strong> The Acid Phosphatase Test was developed in the mid-20th century as a method to detect the presence of semen in forensic investigations.</p>
+                <p><strong>Development:</strong> Over the years, the test has been refined and standardized, becoming one of the most widely used presumptive tests in forensic science.</p>
+                <p><strong>Principle:</strong> The test is based on the detection of acid phosphatase, an enzyme that is found in high concentrations in semen. When a reagent is applied to a sample containing semen, the acid phosphatase catalyzes a reaction that changes the color of the reagent.</p>
+                <p><strong>Process:</strong> The process involves applying the reagent to the suspected sample, observing the color change, and interpreting the result. A positive result typically shows a purple color, indicating the presence of semen.</p>
+                <p><strong>False Positives:</strong> Although the test is highly sensitive, it can sometimes produce false positives. Substances such as certain vaginal secretions, feces, and some vegetables may also cause a color change similar to that produced by semen.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let currentSample = null;
+            let sampleSelected = false;
+            let reagentApplied = false;
+
+            // Event listener for Specimen 1 button
+            document.getElementById('specimen1').addEventListener('click', function() {
+                currentSample = 1;
+                sampleSelected = false;
+                reagentApplied = false;
+                resetLabState();
+                document.getElementById('instructionText').innerText = "Specimen 1 selected. Click on the specimen to apply the reagent.";
+                document.getElementById('sampleSelection').style.display = 'none';
+                document.getElementById('labContent').style.display = 'block';
+            });
+
+            // Event listener for Specimen 2 button
+            document.getElementById('specimen2').addEventListener('click', function() {
+                currentSample = 2;
+                sampleSelected = false;
+                reagentApplied = false;
+                resetLabState();
+                document.getElementById('instructionText').innerText = "Specimen 2 selected. Click on the specimen to apply the reagent.";
+                document.getElementById('sampleSelection').style.display = 'none';
+                document.getElementById('labContent').style.display = 'block';
+            });
+
+            // Event listener for clicking on the specimen image
+            document.getElementById('sampleImg').addEventListener('click', function() {
+                sampleSelected = true;
+                document.getElementById('instructionText').innerText = "Specimen selected. Now apply the reagent.";
+                document.getElementById('applyReagentBtn').disabled = false;
+            });
+
+            // Event listener for Apply Reagent button
+            document.getElementById('applyReagentBtn').addEventListener('click', function() {
+                if (sampleSelected && !reagentApplied) {
+                    const drop = document.getElementById('reagentDrop');
+                    drop.style.opacity = '1';
+                    drop.style.animation = 'pourReagent 2s forwards';
+                    reagentApplied = true;
+                    setTimeout(() => {
+                        drop.style.opacity = '0'; // Hide drop after animation
+                        applyReagentResult(currentSample);
+                    }, 2000);
+                }
+            });
+
+            // Event listener for Return to Selection button
+            document.getElementById('returnBtn').addEventListener('click', function() {
+                resetLab();
+            });
+
+            // Function to apply the reagent and observe the result
+            function applyReagentResult(sample) {
+                let resultColor = document.getElementById('resultColor');
+                if (sample === 1) {
+                    resultColor.style.backgroundColor = 'purple'; // Positive result for Specimen 1
+                } else if (sample === 2) {
+                    resultColor.style.backgroundColor = ''; // No change for Specimen 2 (Negative result)
+                }
+                document.getElementById('instructionText').innerText = `Result observed for Specimen ${sample}.`;
+                document.getElementById('clickInstruction').style.display = 'block';  // Show instruction to click result
+                document.getElementById('returnBtn').style.display = 'block';  // Show return button
+            }
+
+            // Function to reset the lab to its initial state
+            function resetLab() {
+                sampleSelected = false;
+                reagentApplied = false;
+                resetLabState();
+                document.getElementById('sampleSelection').style.display = 'block';
+                document.getElementById('labContent').style.display = 'none';
+            }
+
+            // Function to reset individual elements to their initial state
+            function resetLabState() {
+                document.getElementById('applyReagentBtn').disabled = true;
+                document.getElementById('clickInstruction').style.display = 'none';  // Hide click instruction
+                document.getElementById('returnBtn').style.display = 'none';  // Hide return button
+                document.getElementById('resultColor').style.backgroundColor = '';  // Reset result color
+                document.getElementById('instructionText').innerText = "Select a specimen to begin.";
+            }
+
+            // Discussion view functionality
+            document.getElementById('resultColor').addEventListener('click', function() {
+                if (reagentApplied) {
+                    document.getElementById('discussionModal').style.display = "block";
+                }
+            });
+
+            document.querySelector('.close').addEventListener('click', function() {
+                document.getElementById('discussionModal').style.display = "none";
+            });
+        });
+    </script>
+</body>
+</html>
